@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lanng="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Farplas Üretim İzleme</title> 
+        
+         <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        
+        <!-- Theme style-->
+        <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='/css/gridstyle.css')}}">
+        
+        <!-- Import Plotly-->
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        
+    </head>
+
+    <style>
+
+        .center {
+            margin-left: 15px;
+            margin-right: auto;
+            border: 1px solid black;
+            border-collapse: collapse;
+            
+        }
+        .mold {
+            width:135px;
+            text-align: center;
+            border: 1px solid black;
+        }
+        .parametre{
+            width: 265px;
+            text-align: center;
+            border: 1px solid black;
+            
+        }    
+        .frequency{
+            width: 153px;
+            text-align: center;
+            border: 1px solid black;
+            
+        }
+        .machine{
+            width: 179px;
+            text-align: center;
+            border: 1px solid black;
+           
+        }
+        .acıklama{
+            width: 290px;
+            text-align: center;
+        }
+        .makine{
+            width: 250px;
+            text-align: center;
+        }
+        .zaman{
+            width: 220px;
+            text-align: center;
+        }
+        
+    </style>
+
+    <body >
+        <div class="header">
+            <img id="logo" src="https://farplas.com.tr/assets/img/logos/black-logo.png" width=110px/>
+            
+            <img  id="flatformlogo" src="{{ url_for('serveStaticResource', resource='/images/flatform-logo.png')}}" width=87x/>
+            <h1>Akıllı Üretim İzleme Ekranı</h1>
+            
+        </div>
+
+        <div class="wrapper">
+            <div class="box a">
+                <h2>Enerji Takibi</h2>
+                <div class="innerbox">
+                
+                    <div class="in 1" ,id='sppedMap'>
+
+                    <div id='sppedMap'>
+                        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+                        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+                        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                        
+                        <script  type="text/javascript">
+
+
+                            function update_vars(json_data){
+
+                                var data = [
+                                  {
+                                    domain: { x: [0, 1], y: [0, 1] },
+                                    value: json_data.totalEnergy.dailyMean,
+                                    title:  { text: "Günlük Tüketim", font: { size: 19 }},
+                                    type: "indicator",
+                                    mode: "gauge+number+delta",
+                                    delta:  { reference: 300,decreasing:{'color': "green"},increasing:{'color': "red"} ,relative: true,   position: "top"},
+                                    gauge:  { axis: { range: [null, 600] },
+
+                                            bar: {'color': "#213036"},
+
+                                    threshold: {
+                                        line: { color: "red", width: 7 },
+                                        thickness: 0.75,
+                                        value: 300
+                                              } }
+                                      }
+                                    ];
+
+                                var layout = { width: 380, height: 170,                                  margin: {
+                                                                    l: 0,
+                                                                    r:1,
+                                                                    t : 50,
+                                                                    b:5
+                                                                        } };
+
+                                Plotly.newPlot('sppedMap', data,layout );
+
+                                document.getElementById("weeklyMean").innerHTML =json_data.totalEnergy.weeklyMean+" kW/Saat";
+
+
+                            }
+
+                                $.ajax({
+                                type: "GET",
+                                url: "http://192.168.160.12:8084/dash_api",
+                                data: {section : "5min" , location: "{{location_name}}"},
+                                dataType: 'json',
+                                success: function(response) {
+                                    update_vars(response);
+                                 }
+                                  });
+
+
+                        </script><!-- Plotly chart will be drawn inside this DIV -->
+                </div>
+                    
+                    
+                    
+                </div>
+               
+                <div class="in 3">
+                    <table class="littletable 1">
+                            <tr>
+                                <th>Periyot</th>
+                                <th>Tüketim</th>
+                            </tr>
+                            <tr>
+                                <td>Haftalık</td>
+                                <td id="weeklyMean" >200 kwH</td>
+                        </tr>                
+                        </table>
+                    </div>
+                <div class="in 4"><h6 style="font-size:15px"><br>Enerji Tüketiminin Saatlik Ortalama <br>Değerlerini Gösterir </h6></div>
+                </div> 
+            </div>
+                
+
+            <div class="box b">   
+
+                <h2>Anormal Durumlar</h2>
+                    <div id='radarMap'>
+
+                        <script  type="text/javascript">
+                        
+                        function update_vars2(json_data2) {
+
+                            var data = [];
+                            
+                            for(const [key,value] of Object.entries(json_data2.anomalyRadar)) {
+                                
+                                
+                                data.push({type: 'scatterpolar', r: value["r"],  theta: value["thetha"] ,fill:'toself',name: key });
+                            }
+                            
+
+                          var layout = { 
+                                showlegend: true,
+                                width: 650,
+                                height: 360,
+                                margin: {
+                                            l: 70,
+                                            b : 22,
+                                            t : 19
+                                            },
+                                polar: {
+                                    radialaxis: {
+                                    visible: true,
+                                    range: [0, 10]
+                                    }
+                                    
+                                
+                                }
+                            }
+                           
+
+                            var config = {responsive: true}
+
+                            Plotly.newPlot('radarMap', data, layout, config );
+
+                    }
+
+                             $.ajax({
+                                type: "GET",
+                                url: "http://192.168.160.12:8084/dash_api",
+                                data: {section : "anomaly_2" , location: "{{location_name}}"},
+                                dataType: 'json',
+                                success: function(response) {
+                                    update_vars2(response);
+                                 }
+                                  });
+ 
+                        </script><!-- Plotly chart will be drawn inside this DIV --></div>
+            </div>
+            <div class="box d">
+
+                <h2>Alarmlar</h2>
+                <div class="tabletto">
+                        <table class="tabletto 1">
+                            <thead>
+                                <tr>
+                                    <th>Makine</th>
+                                    <th>Açıklama</th>
+                                    <th>Zaman</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                           <p id="alarm"></p>
+
+                           <script>
+
+                                function buildTableAlarm(alarm_table){
+
+                            
+                                    var table2 = '';
+                                    table2 += "<table border='0'>"
+                        
+
+                                    for(x in alarm_table.alarmTable) {
+                                
+                                        table2+= "<tr><td class='makine'>" + alarm_table.alarmTable[x].Makine +"</td>"+
+                                                "<td class='acıklama'>" + alarm_table.alarmTable[x].A\u00e7\u0131klama +"</td>"+
+                                                "<td class='zaman'>" + alarm_table.alarmTable[x].Zaman+"</td></tr>";       
+
+                                    }
+                                    table2 += "</table>"
+                                    document.getElementById("alarm").innerHTML = table2
+
+                                }
+
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://192.168.160.12:8084/dash_api",
+                                    data: {section : "anomaly_2" , location: "{{location_name}}"},
+                                    dataType: 'json',
+                                    success: function(response) {
+                                        buildTableAlarm(response);
+                                    } 
+                                });
+
+                                </script>
+                            </table>
+                    </div>
+        
+            </div>
+        </div>
+        
+        <div class="wrapper2">
+            
+            <div class="box e">
+
+                <h2>Anormal Durum Listesi</h2>
+                    <div class="tables">
+                        <table class="table 1">
+
+                            <thead>
+                                <tr>
+                                    <th>Kalıp</th>
+                                    <th>Parametre</th>
+                                    <th>Sıklık</th>
+                                    <th>Makine</th>
+                                </tr>
+                            </thead>
+
+                        </table>
+
+                                <p id="demo"></p>
+
+                                <script>
+                   
+                   
+                                function buildTable(data_table){
+
+                            
+                                    var table1 = '';
+                                    table1 += "<table border='1'>"
+                                    table1 += "<table class='center'>"
+                        
+
+                                    for(x in data_table.anomalyFrequencyTable) {
+                                
+                                        table1+= "<tr><td class='mold'>" + data_table.anomalyFrequencyTable[x].Mold +"</td>"+
+                                                "<td class='parametre'>" + data_table.anomalyFrequencyTable[x].Parametre +"</td>"+
+                                                "<td class='frequency'>" + data_table.anomalyFrequencyTable[x].frequency +"</td>"+
+                                                "<td class='machine'>" + data_table.anomalyFrequencyTable[x].machine +"</td></tr>";       
+
+                                    }
+                                    table1 += "</table>"
+                                    document.getElementById("demo").innerHTML = table1
+
+                                }
+
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://192.168.160.12:8084/dash_api",
+                                    data: {section : "anomaly_2" , location: "{{location_name}}"},
+                                    dataType: 'json',
+                                    success: function(response) {
+                                        buildTable(response);
+                                    } 
+                                });
+
+                                </script>
+
+
+                            </table>
+                    </div>
+            </div>
+
+            <div class="box f">
+
+                <h2>Anormal Durum Sayı Takibi</h2>
+                 <div class='corr' id='corrMap'>
+
+                        <script  type="text/javascript">
+
+                            function count_trace(trace_data) {
+
+                                var data2 = [
+                                    {
+                                        z: trace_data.anomalyCountTracing.z,
+                                        x: trace_data.anomalyCountTracing.x,
+                                        y: trace_data.anomalyCountTracing.y,
+                                        type: 'heatmap',
+                                        hoverongaps: false,
+                                        colorscale: ''
+                                    }
+                                ]    
+
+                                var layout = {
+                                    showlegend: true,
+                                    width: 1070,
+                                    height: 300,
+                                    margin: {
+                                            l: 90,
+                                            b : 22,
+                                            t : 5
+                                        },
+                                    
+                                    polar: {
+                                        radialaxis: {
+                                        visible: true,
+                                        range: [0, 50]
+                                        }
+                                    }
+                                };
+
+                                
+
+                            Plotly.newPlot('corrMap', data2,layout, );
+                        }
+
+                            $.ajax({
+                                    type: "GET",
+                                    url: "http://192.168.160.12:8084/dash_api",
+                                    data: {section : "anomaly_2" , location: "{{location_name}}"},
+                                    dataType: 'json',
+                                    success: function(response) {
+                                        count_trace(response);
+                                    } 
+                                });
+
+                        </script>
+                </div>
+                
+                <div class="graph_2">
+                            <div id="bar_8"></div>
+                        </div>
+                
+            </div>
+            <!--<div class="box c">
+                <h2>Anormal Durum Sayı Takibi</h2>
+            </div>-->
+  
+        </div>  
+        
+<script>
+    var x = 0
+    setInterval(function (){
+        if (x == 0) {
+            $(".graph_2").css('left', 0);
+            $(".graph_2").css('width', '100%');
+            x=1;
+        }
+        else {
+            $(".graph_2").css('left', '100%');
+            $(".graph_2").css('width', 0);
+            x=0;
+        }
+
+    }, 3000);
+</script>
+        <script>
+    $.ajax({
+        type: "GET",
+        url: "{{ url_for('dash_api') }}",
+        data: {section : "dash_2_energy" },
+        success: function(response) {
+            console.log(response);
+        }
+    });
+</script>
+    </body>
+</html>
