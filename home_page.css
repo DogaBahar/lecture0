@@ -1,0 +1,153 @@
+body {
+    background-color: #081763;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.col-lg-6 {}
+
+#div1 {
+    background: #081763;
+    display: inline-block;
+    margin-top: 20px;
+    padding-bottom: 25px;
+}
+
+#div2 {
+    background: #2b2e3d;
+    padding-top: 55px;
+    display: inline-block;
+    margin-top: 10px;
+    padding-bottom: 25px;
+}
+
+#div3 {
+    background: #3f4357;
+    padding-top: 15px;
+    display: inline-block;
+}
+
+#div4 {
+    background: #163273;
+    display: inline-block;
+}
+
+#dropdown02 {
+    color: white;
+}
+
+#dropdown03 {
+    color: white;
+}
+
+#dropdown04 {
+    color: white;
+}
+
+h1 {
+    color: white;
+    margin-top: 80px;
+    margin-left: 30px;
+    font-size: large;
+    flex: auto;
+}
+
+h3 {
+    color: white;
+    font-size: large;
+    text-align: center;
+    margin-top: 30px;
+    flex: auto;
+}
+
+h4 {
+    color: white;
+    font-size: large;
+    margin-left: 100px;
+    flex: auto;
+}
+
+h2 {
+    color: white;
+    font-size: large;
+    flex: auto;
+}
+
+h6 {
+    color: white;
+    font-size: x-large;
+    text-align: center;
+    margin-top: 30px;
+    flex: auto;
+}
+
+.list {
+    color: white;
+    margin-left: 50px;
+}
+
+#box {
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    padding-bottom: 20px;
+}
+
+#box2 {
+    border-bottom: 1px solid white;
+}
+
+p {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    margin-top: 10px;
+    flex: auto;
+}
+
+.dropdown-menu {
+    background-color: #2d303a;
+}
+
+.dropdown-item {
+    color: white;
+    padding-right: 50px;
+    margin-bottom: 5px;
+}
+
+#drop1 {
+    margin-bottom: 57px;
+}
+
+#drop2 {
+    margin-bottom: 190px;
+}
+
+#drop3 {
+    margin-top: 92px;
+}
+
+.dropdown-header {
+    color: white;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+li {
+    color: white;
+}
+
+#header1 {
+    margin-top: 30px;
+}
+
+#header3 {
+    margin-left: 25px;
+}
+
+#vertical {
+    border-right: 1px solid white;
+    height: 340px;
+}
