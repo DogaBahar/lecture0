@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+       
+
+        <title>Big Data flatform</title> 
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+         <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        
+        <!-- Theme style-->
+        <link rel="stylesheet" href="home.css">
+        
+        <!-- Import Plotly-->
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        
+
+        
+    </head>
+
+    <body >
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        
+        
+        
+            
+                    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+                        
+                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <img src="logoWhite.png" width="35" height="30">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Services</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                    <div class="d-md-flex align-items-start justify-content-start">
+                                        <div class="a">
+                                        <li class="dropdown-header">Frequently Used</li>
+                                        <ul id="vertical">
+                                            <li><a href="#" class="dropdown-item">Production Report</a></li>
+                                            <li><a href="#" class="dropdown-item">Search & Code</a></li>
+                                            <li><a href="#" class="dropdown-item">Statistical Report</a></li>
+                                            <li><a href="#" class="dropdown-item">Smart Production Dashboard</a></li>
+                                        </ul>
+                                        </div>
+                                        <div class="a">
+                                        <li class="dropdown-header">Visualize</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">Real-Time Monitoring</a></li>
+                                            <li><a href="#" class="dropdown-item">Smart Dashboards</a></li>
+                                            <li><a href="#" class="dropdown-item">Smart Reports</a></li>
+                                            <li><a href="#" class="dropdown-item">Dashboard Maker</a></li>
+                                        </ul>
+                                        <li class="dropdown-header">System</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">System Metrics</a></li>
+                                            <li><a href="#" class="dropdown-item">Spark History</a></li>
+                                            <li><a href="#" class="dropdown-item">YARN</a></li>
+                                            <li><a href="#" class="dropdown-item">Jobs</a></li>
+
+                                        </ul>
+                                        </div>
+                                        <div class="a">
+                                        <li class="dropdown-header">Analyze</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">Statistical Report</a></li>
+                                            <li><a href="#" class="dropdown-item">Correlation Map</a></li>
+                                            <li><a href="#" class="dropdown-item" id="drop1">Discovery Graphs</a></li>
+                                        </ul>
+                                        <li class="dropdown-header">Flow</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">Nifi</a></li>
+                                            <li><a href="#" class="dropdown-item">Kafka</a></li>
+                                        </ul>
+                                        </div>
+                                        <div class="a">
+                                        <li class="dropdown-header">Educate</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">Search & Code</a></li>
+                                            <li><a href="#" class="dropdown-item" id="drop1">Search & ML</a></li>
+                                        </ul>
+                                        <li class="dropdown-header" id="drop3">Database</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">HDFS</a></li>
+                                            <li><a href="#" class="dropdown-item">ElasticSearch</a></li>
+                                            <li><a href="#" class="dropdown-item">MongoDB</a></li>
+                                        </ul>
+                                        </div>
+                                        <div class="a">
+                                        <li class="dropdown-header">Machine Learning</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">Interactive ML</a></li>
+                                            <li><a href="#" class="dropdown-item">Quality Predictor</a></li>
+                                            <li><a href="#" class="dropdown-item">Quality Anomaly Detector</a></li>
+                                            <li><a href="#" class="dropdown-item">Energy Anomaly Detector</a></li>
+
+                                        </ul>
+                                        <li class="dropdown-header">Develop</li>
+                                        <ul>
+                                            <li><a href="#" class="dropdown-item">Python</a></li>
+                                            <li><a href="#" class="dropdown-item">Spark</a></li>
+                                            <li><a href="#" class="dropdown-item">Deploy</a></li>
+                                        </ul>
+                                        </div>
+                                        
+                                    </div>
+                                    </ul>  
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Documents</a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdown02">
+                                            <li><a href="#" class="dropdown-item">Production Report</a></li>
+                                            <li><a href="#"class="dropdown-item">Search & Code</a></li>
+                                            <li><a href="#" class="dropdown-item">Statistical Report</a></li>
+                                            <li><a href="#" class="dropdown-item">Smart Production Dashboard</a></li>
+                                    </ul>  
+                                </li> 
+                                
+                                <ul class="nav navbar-nav ml-auto">     
+                                    <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Languages</a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="turkish_home.html" class="dropdown-item" >Turkish</a></li>
+                                        </ul>  
+                                    </li>
+                                </ul>      
+                            </ul>
+                        </div>
+                    </nav>
+           
+        
+        <div class="container-lg-fluid">    
+            <div class="row no-gutters">
+                <div class="col-lg-6" id="div1">
+                    <h1>Flatform News</h1>
+                    <img src="Software.jpg" style="float:right;width:350px;height:200px;margin-right:50px;">
+
+                    <br>
+                    <h4 >New Releases</h4>
+
+                    <ul class="list">
+                        <li class="list">Flatty Visual</li>
+                        <li class="list">Fluster DB</li>
+                    </ul>
+                    <br>
+                    <h4 >For more information please contact our team</h4>
+                </div>
+            
+        
+                <div class="col-lg-6" id="div2">
+                    <script  type="text/javascript">
+
+                        var ultimateColors = ['rgb(211, 214, 219)', 'rgb(145, 149, 156)', 'rgb(199, 202, 209)', 'rgb(113, 115, 120)'];
+                        var data = [{
+                            values: [25, 25, 25, 25],
+                            labels: ['Statistical Report', 'ElasticSearch', 'Search & Code', 'Elasticsearch'],
+                            hoverinfo: 'label',
+                            hole: .6,
+                            type: 'pie',
+                            textinfo: 'none',
+                            marker: {
+                                colors: ultimateColors
+                                }
+                            }];
+
+                            var layout = {
+
+                            title: {
+                                text:'Most Used Platform Services',
+                                font: {
+                                    size: 24,
+                                    color: '#ffffff'
+                                    }
+                                },
+                                
+                            paper_bgcolor:"#2b2e3d",
+                            annotations: [
+                                {
+                                font: {
+                                    size: 29,
+                                    color: '#ffffff'
+                                },
+                                showarrow: false,
+                                text: '345',
+                                x: 0.50,
+                                y: 0.5
+                                }
+                            ],
+                            height: 302,
+                            width: 650,
+                            showlegend: true,
+                            font: {
+                                color: '#ffffff'},
+                            automargin: true,
+                            margin:{
+                                b: 8
+                                
+                            }
+                            
+                            };
+
+                            Plotly.newPlot('div2', data, layout,{displayModeBar: false, responsive: true});
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-lg-fluid">    
+            <div class="row no-gutters">
+                <div class="col-lg-6" id="div3" >
+                    
+                    <script  type="text/javascript">
+
+                        var data = [{
+                            values: [50/3, 50/3, 50/3,50],
+                            labels: ['Production', 'Process Engineering', 'Sales & Marketing','Big Data'],
+                            type: 'pie',
+                            textinfo: 'none',
+                        }];
+
+                        var layout = {
+                            title: {
+                                text:'Platform Usage by Departments',
+                                font: {
+                                    size: 24
+                                    }
+                                },
+                            height: 346,
+                            width: 650,
+                            showlegend: true,
+                            automargin: true,
+                            paper_bgcolor:"#3f4357",
+                            font: {
+                                color: '#ffffff'},
+                            
+                                };
+
+                        Plotly.newPlot('div3', data, layout,{displayModeBar: false, responsive: true});
+                    </script>
+                </div>
+            
+        
+                <div class="col-lg-6" id="div4" >
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-6" id="box">
+                            <h3>Connected Devices</h3>
+                            <p>1500</p>
+                        </div>
+                        <div class="col-lg-6" id="box2">
+                            <h3>Working Devices</h3>
+                            <p>1450</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-12">
+                            <h6>Total Produced Data</h6>
+                            <p>567MB/hour</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+    </body>
+</html>
